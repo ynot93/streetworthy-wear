@@ -1,12 +1,13 @@
 type Product = {
     name: string;
     price: number;
+    image: string;
   };
   
   const products: Product[] = [
-    { name: "Hoodie 1", price: 3000 },
-    { name: "Hoodie 2", price: 3000 },
-    { name: "Hoodie 3", price: 3000 },
+    { name: "Hoodie 1", price: 3000, image: "../assets/product1.png" },
+    { name: "Hoodie 2", price: 3000, image: "../assets/product2.png" },
+    { name: "Hoodie 3", price: 3000, image: "../assets/product3.png" },
   ];
   
   const ProductShowcase: React.FC = () => (
@@ -15,7 +16,7 @@ type Product = {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
         {products.map((item) => (
           <div key={item.name} className="bg-gray-800 p-4 rounded-lg">
-            <img src="../assets/product.png" alt={item.name} className="rounded-lg" />
+            <img src={item.image} alt={item.name} className="rounded-lg" />
             <p className="mt-2">{item.name} - ${item.price}</p>
           </div>
         ))}
