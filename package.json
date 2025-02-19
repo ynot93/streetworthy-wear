@@ -1,17 +1,17 @@
 {
   "name": "streetworthy-wear",
+  "homepage": "https://ynot93.github.io/streetworthy-wear/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "predeploy": "tsc -b && vite build",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
-  "homepage": "https://ynot93.github.io/streetworthy-wear/",
   "dependencies": {
     "@fortawesome/free-brands-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
