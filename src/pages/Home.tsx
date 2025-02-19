@@ -6,8 +6,8 @@ import Footer from "../components/Footer";
 const Home: React.FC = () => (
   <>
     <Hero />
-    <Questionnaire />
     <ProductShowcase />
+    <Questionnaire />
     <Footer />
   </>
 );
