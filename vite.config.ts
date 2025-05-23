@@ -9,4 +9,9 @@ export default defineConfig({
     tailwindcss()
   ],
   base: '/streetworthy-wear',
+  server: {
+    proxy: {
+      '/api': 'http://localhost:3001',
+    },
+  },
 })
