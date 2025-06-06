@@ -3,7 +3,7 @@ import Questionnaire from "../components/Questionnaire";
 import ProductShowcase from "../components/ProductShowcase";
 import Footer from "../components/Footer";
 
-const Home: React.FC = () => (
+const HomePage: React.FC = () => (
   <>
     <Hero />
     <ProductShowcase />
@@ -11,4 +11,4 @@ const Home: React.FC = () => (
     <Footer />
   </>
 );
-export default Home;
+export default HomePage;
