@@ -56,7 +56,7 @@ export const authenticated = asyncHandler(async (req: CustomRequest, res: Respon
 export const authorize = (...roles: string[]) => {
   return (req: CustomRequest, res: Response, next: NextFunction) => {
     if (!req.user || !roles.includes(req.user.role)) {
-      return res.status(403).json({
+      res.status(403).json({
         success: false,
         message: `User role ${req.user?.role || 'unknown'} is not authorized to access this route`,
       });
