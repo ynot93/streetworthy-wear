@@ -1,9 +1,11 @@
 // backend/index.js
 import express, { Application, Request, Response } from "express";
 import dotenv from 'dotenv';
-import cookieParser from 'cookie-parser'; // For parsing cookies
+import cookieParser from 'cookie-parser';
 import connectDB from './config/db';
 import authRoutes from './routes/authRoutes';
+import productRoutes from './routes/productRoutes';
+
 const cors = require('cors');
 
 // Load environment variables from .env file
@@ -32,6 +34,7 @@ app.use(cookieParser());
 
 // Mount Routers
 app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/products', productRoutes);
 
 // Mount Images
 app.use("/images", express.static("public/images"));
