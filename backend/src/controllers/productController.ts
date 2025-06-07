@@ -22,7 +22,13 @@ export const getProducts = asyncHandler(async (req: Request, res: Response, next
  * @access  Public
  */
 export const getProductById = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-  const product = await Product.findById(req.params.id);
+  const { id } = req.params;
+
+  // Check if the id is a valid ObjectId
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ success: false, message: 'Invalid product ID' });
+  }
+  const product = await Product.findById(id);
 
   if (!product) {
     return res.status(404).json({ success: false, message: 'Product not found' });
