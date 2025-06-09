@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import Product, { IProduct } from '../models/Product';
 import asyncHandler from '../middleware/asyncHandler'; // For handling async errors
+import mongoose from 'mongoose';
 
 /**
  * @desc    Get all products
