@@ -10,6 +10,7 @@ const HeroFC = () => (
         <li><Link to="/login">Login</Link></li>
         <li><Link to="/register">Register</Link></li>
         <li><Link to="/products">Browse Products</Link></li>
+        <li><Link to="/cart">View Cart</Link></li>
       </ul>
     </div>
     <div className='md:w-1/2 text-center'>
