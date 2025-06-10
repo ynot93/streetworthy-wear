@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import productService, { Product } from '../services/productService';
+import { useCart } from '../context/CartContext';
 
 function ProductDetailPage() {
   const { id } = useParams<{ id: string }>(); // Get product ID from URL params
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [quantity, setQuantity] = useState(1); // Default quantity
+  const { addItemToCart } = useCart();
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -27,6 +30,13 @@ function ProductDetailPage() {
 
     fetchProduct();
   }, [id]); // Re-fetch if ID changes
+
+  const handleAddToCart = () => {
+    if (product) {
+      addItemToCart(product, quantity); // Use the addItemToCart function from the context
+      alert(`${quantity} ${product.name}(s) added to cart!`);
+    }
+  }
 
   if (loading) {
     return <div className="flex justify-center items-center h-screen text-xl font-semibold">Loading product details...</div>;
@@ -63,8 +73,21 @@ function ProductDetailPage() {
             ) : (
               <p className="text-red-600 font-semibold mb-4">Out of Stock</p>
             )}
+            <div className="flex items-center mb-4">
+              <label htmlFor="quantity" className="mr-2 font-semibold">Quantity:</label>
+              <input
+                type="number"
+                id="quantity"
+                value={quantity}
+                onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value)))} // Ensure quantity is at least 1
+                min="1"
+                max={product.stock}
+                className="w-20 border border-gray-300 rounded-md py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
             <button
               className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg text-lg transition duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed"
+              onClick={handleAddToCart}
               disabled={product.stock === 0}
             >
               Add to Cart
