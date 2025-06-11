@@ -1,4 +1,20 @@
 import api from './api';
+import { ApiResponse } from './api';
+
+export interface ShippingAddress {
+  address: string;
+  city: string;
+  postalCode: string;
+  country: string;
+}
+
+export interface UserData {
+  username: string;
+  email: string;
+  password?: string;
+  role: 'customer' | 'admin';
+  shippingAddress?: ShippingAddress;
+}
 
 const authService = {
   register: async (username: string, email: string, password: string, role: 'customer' | 'admin') => {
@@ -17,8 +33,8 @@ const authService = {
   // Example of getting user profile (requires being logged in)
   getMe: async () => {
     // Axios will automatically send the HTTP-only cookie if it's present and `withCredentials: true` is set.
-    const response = await api.get('/auth/me');
-    return response.data;
+    const response = await api.get<ApiResponse<UserData>>('/auth/me');
+    return response.data.user;
   },
 
   logout: async () => {
