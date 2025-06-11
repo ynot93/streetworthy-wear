@@ -3,17 +3,34 @@ import mongoose, { Document, Schema } from 'mongoose';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
+// Define Shipping Address Interface
+export interface IShippingAddress {
+  address: string;
+  city: string;
+  postalCode: string;
+  country: string;
+}
+
 // Define the interface for User document
 export interface IUser extends Document {
   username: string;
   email: string;
   password?: string; // Optional because it won't always be returned
   role: 'customer' | 'admin';
+  shippingAddress?: IShippingAddress;
   createdAt: Date;
   updatedAt: Date;
   matchPassword(enteredPassword: string): Promise<boolean>;
   getSignedJwtToken(): string;
 }
+
+// Define Shipping Address Schema (sub-schema)
+const ShippingAddressSchema: Schema = new Schema({
+  address: { type: String, required: true },
+  city: { type: String, required: true },
+  postalCode: { type: String, required: true },
+  country: { type: String, required: true },
+});
 
 // Define the User Schema
 const UserSchema: Schema<IUser> = new Schema(
@@ -45,6 +62,7 @@ const UserSchema: Schema<IUser> = new Schema(
       enum: ['customer', 'admin'],
       default: 'customer',
     },
+    shippingAddress: ShippingAddressSchema,
   },
   {
     timestamps: true,
