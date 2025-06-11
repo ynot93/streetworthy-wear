@@ -6,6 +6,7 @@ import connectDB from './config/db';
 import authRoutes from './routes/authRoutes';
 import productRoutes from './routes/productRoutes';
 import cartRoutes from './routes/cartRoutes';
+import orderRoutes from './routes/orderRoutes';
 
 const cors = require('cors');
 
@@ -36,7 +37,8 @@ app.use(cookieParser());
 // Mount Routers
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/products', productRoutes);
-app.use('/api/v1/cart', cartRoutes)
+app.use('/api/v1/cart', cartRoutes);
+app.use('/api/v1/order', orderRoutes)
 
 // Mount Images
 app.use("/images", express.static("public/images"));
