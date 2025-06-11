@@ -22,7 +22,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     try {
       // Attempt to get user data from the backend.
       // If the httpOnly cookie is present and valid, this will succeed.
-      const userData = await authService.getMe();
+      const userData: UserData = await authService.getMe();
       setIsLoggedIn(true);
       setUser(userData);
     } catch (error) {
