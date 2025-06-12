@@ -9,6 +9,7 @@ export interface ShippingAddress {
 }
 
 export interface UserData {
+  _id: string;
   username: string;
   email: string;
   password?: string;
@@ -34,7 +35,7 @@ const authService = {
   getMe: async () => {
     // Axios will automatically send the HTTP-only cookie if it's present and `withCredentials: true` is set.
     const response = await api.get<ApiResponse<UserData>>('/auth/me');
-    return response.data.user;
+    return response.data.data;
   },
 
   logout: async () => {

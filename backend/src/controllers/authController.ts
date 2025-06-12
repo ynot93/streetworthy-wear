@@ -108,11 +108,6 @@ export const getMe = asyncHandler(async (req: CustomRequest, res: Response, next
 
   res.status(200).json({
     success: true,
-    user: {
-      id: user._id,
-      username: user.username,
-      email: user.email,
-      role: user.role,
-    },
+    data: user,
   });
 });
