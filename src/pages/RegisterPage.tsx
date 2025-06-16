@@ -1,7 +1,7 @@
-// my-ecommerce-frontend/src/pages/RegisterPage.tsx
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import authService from '../services/authService'; // We'll create this
+import authService from '../services/authService';
+import { useAuth } from '../context/AuthContext';
 
 function RegisterPage() {
   const [username, setUsername] = useState('');
@@ -11,6 +11,7 @@ function RegisterPage() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { loginUser } = useAuth()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,7 +27,8 @@ function RegisterPage() {
     try {
       // For simplicity, we'll register as 'customer' by default.
       // In a real app, admin would manage roles or it'd be inferred.
-      await authService.register(username, email, password, 'customer');
+      const userData = await authService.register(username, email, password, 'customer');
+      loginUser(userData);
       alert('Registration successful! You can now log in.');
       navigate('/login'); // Redirect to login page after successful registration
     } catch (err: any) {
