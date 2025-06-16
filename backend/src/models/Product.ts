@@ -7,7 +7,7 @@ export interface IProduct extends Document {
   description: string;
   price: number;
   category: string;
-  brand?: string; // Optional brand
+  brand: string;
   stock: number;
   imageUrl: string; // URL to the product image
   createdAt: Date;
