@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import authService from '../services/authService'; // We'll create this
+import authService from '../services/authService';
+import { useAuth } from '../context/AuthContext';
+import { UserData } from '../services/authService';
 
 function LoginPage() {
   const [email, setEmail] = useState('');
@@ -8,16 +10,19 @@ function LoginPage() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { loginUser, checkAuth } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
     setLoading(true);
 
-    try {
-      await authService.login(email, password);
+     try {
+      const userData: UserData = await authService.login(email, password);
+      loginUser(userData); // Update AuthContext state
       alert('Login successful!');
       navigate('/'); // Redirect to home or dashboard after successful login
+      checkAuth(); // Re-check auth to ensure user data is fresh
     } catch (err: any) {
       console.error('Login error:', err);
       setError(err.response?.data?.message || 'Login failed. Please check your credentials.');
