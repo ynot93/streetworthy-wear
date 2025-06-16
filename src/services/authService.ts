@@ -19,16 +19,16 @@ export interface UserData {
 
 const authService = {
   register: async (username: string, email: string, password: string, role: 'customer' | 'admin') => {
-    const response = await api.post('/auth/register', { username, email, password, role });
+    const response = await api.post<ApiResponse<UserData>>('/auth/register', { username, email, password, role });
     // The backend sets the JWT as an HTTP-only cookie, so we don't need to store it manually here.
     // If you were returning the token in the response body, you'd save it here (e.g., localStorage.setItem('token', response.data.token)).
-    return response.data;
+    return response.data.data;
   },
 
   login: async (email: string, password: string) => {
-    const response = await api.post('/auth/login', { email, password });
+    const response = await api.post<ApiResponse<UserData>>('/auth/login', { email, password });
     // The backend sets the JWT as an HTTP-only cookie.
-    return response.data;
+    return response.data.data;
   },
 
   // Example of getting user profile (requires being logged in)
