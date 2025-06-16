@@ -34,6 +34,7 @@ export interface Order {
   taxPrice: number;
   shippingPrice: number;
   totalPrice: number;
+  itemsPrice?: number;
   isPaid: boolean;
   paidAt?: string; // Date string
   isDelivered: boolean;
@@ -48,6 +49,7 @@ const orderService = {
     orderItems: OrderItem[];
     shippingAddress: ShippingAddress;
     paymentMethod: string;
+    itemsPrice?: number;
     taxPrice: number;
     shippingPrice: number;
     totalPrice: number;
@@ -72,7 +74,7 @@ const orderService = {
     return response.data.data;
   },
 
-  // Admin only (for later if you build an admin dashboard)
+  // Admin only (for later if we build an admin dashboard)
   getAllOrders: async (): Promise<Order[]> => {
     const response = await api.get<ApiResponse<Order[]>>('/orders');
     return response.data.data;
