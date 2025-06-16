@@ -18,6 +18,7 @@ export const addOrderItems = asyncHandler(async (req: CustomRequest, res: Respon
     orderItems: clientOrderItems, // These are the items from the client's cart
     shippingAddress,
     paymentMethod,
+    itemsPrice,
     taxPrice,
     shippingPrice,
     totalPrice,
@@ -61,6 +62,7 @@ export const addOrderItems = asyncHandler(async (req: CustomRequest, res: Respon
     orderItems,
     shippingAddress,
     paymentMethod,
+    itemsPrice,
     taxPrice,
     shippingPrice,
     totalPrice,
