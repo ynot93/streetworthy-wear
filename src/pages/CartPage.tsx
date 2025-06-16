@@ -1,8 +1,9 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { formatCurrency } from '../utils/formatCurrency'; // Utility function for formatting prices
 
 function CartPage() {
+  const navigate = useNavigate();
   const { cartItems, totalItems, totalPrice, updateCartItemQuantity, removeItemFromCart, clearCart } = useCart();
 
   const handleQuantityChange = (productId: string, newQuantity: number) => {
@@ -15,6 +16,10 @@ function CartPage() {
 
   const handleClearCart = () => {
     clearCart();
+  };
+
+  const handleProceedToCheckout = () => {
+    navigate('/checkout'); // Navigate to the checkout page
   };
 
   if (cartItems.length === 0) {
@@ -78,10 +83,9 @@ function CartPage() {
         <button onClick={handleClearCart} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4">
           Clear Cart
         </button>
-        {/* Checkout will be implemented later */}
-        {/* <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4 ml-4">
+        <button onClick={handleProceedToCheckout} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4 ml-4">
           Proceed to Checkout
-        </button> */}
+        </button>
       </div>
     </div>
   );
