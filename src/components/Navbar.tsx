@@ -1,15 +1,15 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
-import { useAuth } from '../context/AuthContext'; // Import AuthContext
+import { useAuth } from '../context/AuthContext';
 
 function Navbar() {
   const { totalItems } = useCart();
-  const { isLoggedIn, user, logoutUser } = useAuth(); // Use AuthContext
+  const { isLoggedIn, user, logoutUser } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     await logoutUser();
-    navigate('/login'); // Redirect to login page after logout
+    navigate('/login');
   };
 
   return (
@@ -32,6 +32,11 @@ function Navbar() {
           </Link>
           {isLoggedIn ? (
             <>
+              {user?.role === 'admin' && ( // Conditionally render for admin
+                <Link to="/admin/products" className="hover:text-blue-300">
+                  Admin Products
+                </Link>
+              )}
               <Link to="/myorders" className="hover:text-blue-300">
                 My Orders
               </Link>
