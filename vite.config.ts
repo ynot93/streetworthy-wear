@@ -8,7 +8,7 @@ export default defineConfig({
     react(),
     tailwindcss()
   ],
-  base: '/streetworthy-wear',
+  base: '',
   server: {
     proxy: {
       '/api': 'http://localhost:3001',
