@@ -11,9 +11,11 @@ function ProductListPage() {
     const fetchProducts = async () => {
       try {
         const data = await productService.getAllProducts();
-        setProducts(data);
+        setProducts(data || []);
+        console.log('Products:', data)
       } catch (err: any) {
         setError(err.message || 'Failed to fetch products');
+        setProducts([]);
       } finally {
         setLoading(false);
       }
