@@ -37,11 +37,12 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setError(null);
       try {
         const cartData: Cart = await cartService.getCart();
+        console.log('Cart Data:', cartData);
         // Map the backend cart items to the frontend CartItem interface
-        const mappedCartItems: CartItem[] = cartData.items.map(item => ({
+        const mappedCartItems: CartItem[] = cartData?.items?.map(item => ({
           product: item.product as Product, // Cast to Product
           quantity: item.quantity,
-        }));
+        })) || [];
         setCartItems(mappedCartItems);
       } catch (err: any) {
         setError(err.message || 'Failed to fetch cart');
