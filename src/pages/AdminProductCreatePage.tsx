@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ProductForm from '../components/ProductForm';
-import productService, { Product } from '../services/productService';
+import productService, { ProductDataForApi } from '../services/productService';
 import { useAuth } from '../context/AuthContext';
 
 function AdminProductCreatePage() {
@@ -18,7 +18,7 @@ function AdminProductCreatePage() {
     }
   }, [isLoggedIn, user, navigate]);
 
-  const handleCreate = async (productData: Omit<Product, '_id' | 'createdAt' | 'updatedAt'>) => {
+  const handleCreate = async (productData: ProductDataForApi) => {
     setLoading(true);
     setError(null);
     try {

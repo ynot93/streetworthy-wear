@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import ProductForm from '../components/ProductForm';
-import productService, { Product } from '../services/productService';
+import productService, { Product, ProductDataForApi } from '../services/productService';
 import { useAuth } from '../context/AuthContext';
 
 function AdminProductEditPage() {
@@ -39,7 +39,7 @@ function AdminProductEditPage() {
     fetchProduct();
   }, [id, isLoggedIn, user, navigate]);
 
-  const handleUpdate = async (productData: Omit<Product, '_id' | 'createdAt' | 'updatedAt'>) => {
+  const handleUpdate = async (productData: ProductDataForApi) => {
     if (!id) return; // Should not happen if page is rendered correctly
     setSubmitting(true);
     setError(null);
