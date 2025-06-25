@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
+import logoImg from '../assets/logo.png';
 
 function Navbar() {
   const { totalItems } = useCart();
@@ -15,8 +16,8 @@ function Navbar() {
   return (
     <nav className="bg-gray-800 p-4 text-white">
       <div className="container mx-auto flex justify-between items-center">
-        <Link to="/" className="text-2xl font-bold hover:text-blue-300">
-          StreetWorthy Wear
+        <Link to="/" className="">
+          <img src={logoImg} alt="Logo" className="h-18 w-full object-cover" />
         </Link>
         <div className="flex items-center space-x-6">
           <Link to="/products" className="hover:text-blue-300">
