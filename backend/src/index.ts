@@ -3,11 +3,13 @@ import express, { Application, Request, Response } from "express";
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import connectDB from './config/db';
+import path from 'path';
+// Import Routes
 import authRoutes from './routes/authRoutes';
 import productRoutes from './routes/productRoutes';
 import cartRoutes from './routes/cartRoutes';
 import orderRoutes from './routes/orderRoutes';
-
+// Require CORS
 const cors = require('cors');
 
 // Load environment variables from .env file
@@ -18,7 +20,7 @@ connectDB();
 
 const app: Application = express();
 const PORT = process.env.PORT || 3001;
-const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173/streetworthy-wear'; // Default frontend URL for CORS
+const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173'; // Default frontend URL for CORS
 
 // CORS Configuration
 // Allow requests only from your frontend domain
@@ -42,6 +44,9 @@ app.use('/api/v1/order', orderRoutes)
 
 // Mount Images
 app.use("/images", express.static("public/images"));
+
+// Serve static files from public folder
+app.use('/public', express.static(path.join(__dirname, '../public')));
 
 // Basic Route
 app.get('/', (req: Request, res: Response) => {
