@@ -47,7 +47,16 @@ export const getProductById = asyncHandler(async (req: Request, res: Response, n
  * @access  Private/Admin
  */
 export const createProduct = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-  const { name, description, price, category, brand, stock, imageUrl } = req.body;
+  const { name, description, price, category, brand, stock } = req.body;
+  let imageUrl = req.body.imageUrl; // Default to URL if provided directly
+  if (req.file) { // If an image file was uploaded
+    // Construct the URL where the image will be accessible
+    // Assuming your server is running on http://localhost:5173
+    // and static files are served from /public
+    imageUrl = `<span class="math-inline">\{req\.protocol\}\://</span>{req.get('host')}/public/uploads/${req.file.filename}`;
+  } else if (!imageUrl) {
+    return res.status(400).json({ success: false, message: 'Product image or image url is required' });
+  }
 
   const product = await Product.create({
     name,
@@ -71,7 +80,11 @@ export const createProduct = asyncHandler(async (req: Request, res: Response, ne
  * @access  Private/Admin
  */
 export const updateProduct = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-  const { name, description, price, category, brand, stock, imageUrl } = req.body;
+  const { name, description, price, category, brand, stock } = req.body;
+  let imageUrl = req.body.imageUrl; // Start with the existing or provided URL
+  if (req.file) { // If a new image file was uploaded
+    imageUrl = `<span class="math-inline">\{req\.protocol\}\://</span>{req.get('host')}/public/uploads/${req.file.filename}`;
+  }
 
   let product = await Product.findById(req.params.id);
 
