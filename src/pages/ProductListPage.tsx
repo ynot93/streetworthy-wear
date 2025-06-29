@@ -12,7 +12,6 @@ function ProductListPage() {
       try {
         const data = await productService.getAllProducts();
         setProducts(data || []);
-        console.log('Products:', data)
       } catch (err: any) {
         setError(err.message || 'Failed to fetch products');
         setProducts([]);
