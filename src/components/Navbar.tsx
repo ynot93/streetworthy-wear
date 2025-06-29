@@ -14,7 +14,7 @@ function Navbar() {
   };
 
   return (
-    <nav className="bg-gray-800 p-4 text-white">
+    <nav className="bg-gray-800 text-white">
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/" className="">
           <img src={logoImg} alt="Logo" className="h-18 w-full object-cover" />
