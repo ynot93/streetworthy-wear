@@ -145,7 +145,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   return (
     <CartContext.Provider value={value}>
       {!loading ? children : <div className="flex justify-center items-center h-screen text-xl font-semibold">Loading Cart...</div>}
-      {error && <div className="flex justify-center items-center h-screen text-red-600 text-lg">{error}</div>}
+      {error && <div className="flex justify-center items-center text-red-600 text-lg">{error}</div>}
     </CartContext.Provider>
   );
 };
