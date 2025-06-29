@@ -40,7 +40,7 @@ app.use(cookieParser());
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/products', productRoutes);
 app.use('/api/v1/cart', cartRoutes);
-app.use('/api/v1/order', orderRoutes)
+app.use('/api/v1/orders', orderRoutes)
 
 // Mount Images
 app.use("/images", express.static("public/images"));
