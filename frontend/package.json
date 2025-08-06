@@ -5,7 +5,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"npm run dev --prefix backend\" \"vite\"",
+    "dev": "concurrently \"npm run dev --prefix ../backend\" \"vite\"",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "build": "tsc -b && vite build",
